@@ -1,0 +1,155 @@
+======= Starting work ========
+initializing Nn_top
+Initializing Global INT Controller
+Setting up Interrupt Controller
+***** Loading lenet with biases ******
+Initializing weights layer 0
+Initializing weights layer 1
+Initializing weights layer 2
+Initializing weights layer 3
+Initializing weights layer 4
+Initializing bias layer 0
+Initializing bias layer 1
+Initializing bias layer 2
+Initializing bias layer 3
+Initializing bias layer 4
+Done Initializations ...
+Interrupts ready to go ...
+Done flushing memory
+Sending input data
+Starting IP
+Time: 0.001744590 ms
+
+Fps: 573.20
+
+Hardware[0] = 0,	 gold[0] = 0
+Hardware[1] = 0,	 gold[1] = 0
+Hardware[2] = 0,	 gold[2] = 0
+Hardware[3] = 0,	 gold[3] = 0
+Hardware[4] = 85,	 gold[4] = 85
+Hardware[5] = 0,	 gold[5] = 0
+Hardware[6] = 0,	 gold[6] = 0
+Hardware[7] = 0,	 gold[7] = 0
+Hardware[8] = 76,	 gold[8] = 76
+Hardware[9] = 67,	 gold[9] = 67
+Hardware[10] = 60,	 gold[10] = 60
+Hardware[11] = 0,	 gold[11] = 0
+Hardware[12] = 0,	 gold[12] = 0
+Hardware[13] = 35,	 gold[13] = 35
+Hardware[14] = 18,	 gold[14] = 18
+Hardware[15] = 0,	 gold[15] = 0
+Hardware[16] = 0,	 gold[16] = 0
+Hardware[17] = 0,	 gold[17] = 0
+Hardware[18] = 41,	 gold[18] = 41
+Hardware[19] = 0,	 gold[19] = 0
+Hardware[20] = 196,	 gold[20] = 196
+Hardware[21] = 255,	 gold[21] = 255
+Hardware[22] = 40,	 gold[22] = 40
+Hardware[23] = 56,	 gold[23] = 56
+Hardware[24] = 0,	 gold[24] = 0
+Hardware[25] = 0,	 gold[25] = 0
+Hardware[26] = 7,	 gold[26] = 7
+Hardware[27] = 11,	 gold[27] = 11
+Hardware[28] = 112,	 gold[28] = 112
+Hardware[29] = 0,	 gold[29] = 0
+Hardware[30] = 39,	 gold[30] = 39
+Hardware[31] = 229,	 gold[31] = 229
+Hardware[32] = 2,	 gold[32] = 2
+Hardware[33] = 0,	 gold[33] = 0
+Hardware[34] = 0,	 gold[34] = 0
+Hardware[35] = 0,	 gold[35] = 0
+Hardware[36] = 0,	 gold[36] = 0
+Hardware[37] = 0,	 gold[37] = 0
+Hardware[38] = 26,	 gold[38] = 26
+Hardware[39] = 21,	 gold[39] = 21
+Hardware[40] = 92,	 gold[40] = 92
+Hardware[41] = 24,	 gold[41] = 24
+Hardware[42] = 0,	 gold[42] = 0
+Hardware[43] = 130,	 gold[43] = 130
+Hardware[44] = 5,	 gold[44] = 5
+Hardware[45] = 18,	 gold[45] = 18
+Hardware[46] = 0,	 gold[46] = 0
+Hardware[47] = 0,	 gold[47] = 0
+Hardware[48] = 0,	 gold[48] = 0
+Hardware[49] = 0,	 gold[49] = 0
+Hardware[50] = 61,	 gold[50] = 61
+Hardware[51] = 0,	 gold[51] = 0
+Hardware[52] = 0,	 gold[52] = 0
+Hardware[53] = 86,	 gold[53] = 86
+Hardware[54] = 18,	 gold[54] = 18
+Hardware[55] = 42,	 gold[55] = 42
+Hardware[56] = 0,	 gold[56] = 0
+Hardware[57] = 177,	 gold[57] = 177
+Hardware[58] = 0,	 gold[58] = 0
+Hardware[59] = 0,	 gold[59] = 0
+Hardware[60] = 0,	 gold[60] = 0
+Hardware[61] = 0,	 gold[61] = 0
+Hardware[62] = 0,	 gold[62] = 0
+Hardware[63] = 94,	 gold[63] = 94
+Hardware[64] = 0,	 gold[64] = 0
+Hardware[65] = 0,	 gold[65] = 0
+Hardware[66] = 0,	 gold[66] = 0
+Hardware[67] = 0,	 gold[67] = 0
+Hardware[68] = 0,	 gold[68] = 0
+Hardware[69] = 0,	 gold[69] = 0
+Hardware[70] = 23,	 gold[70] = 23
+Hardware[71] = 0,	 gold[71] = 0
+Hardware[72] = 255,	 gold[72] = 255
+Hardware[73] = 0,	 gold[73] = 0
+Hardware[74] = 33,	 gold[74] = 33
+Hardware[75] = 0,	 gold[75] = 0
+Hardware[76] = 115,	 gold[76] = 115
+Hardware[77] = 0,	 gold[77] = 0
+Hardware[78] = 44,	 gold[78] = 44
+Hardware[79] = 0,	 gold[79] = 0
+Hardware[80] = 0,	 gold[80] = 0
+Hardware[81] = 0,	 gold[81] = 0
+Hardware[82] = 1,	 gold[82] = 1
+Hardware[83] = 152,	 gold[83] = 152
+Hardware[84] = 0,	 gold[84] = 0
+Hardware[85] = 90,	 gold[85] = 90
+Hardware[86] = 19,	 gold[86] = 19
+Hardware[87] = 0,	 gold[87] = 0
+Hardware[88] = 167,	 gold[88] = 167
+Hardware[89] = 0,	 gold[89] = 0
+Hardware[90] = 0,	 gold[90] = 0
+Hardware[91] = 0,	 gold[91] = 0
+Hardware[92] = 0,	 gold[92] = 0
+Hardware[93] = 0,	 gold[93] = 0
+Hardware[94] = 88,	 gold[94] = 88
+Hardware[95] = 55,	 gold[95] = 55
+Hardware[96] = 0,	 gold[96] = 0
+Hardware[97] = 198,	 gold[97] = 198
+Hardware[98] = 0,	 gold[98] = 0
+Hardware[99] = 69,	 gold[99] = 69
+Hardware[100] = 0,	 gold[100] = 0
+Hardware[101] = 0,	 gold[101] = 0
+Hardware[102] = 15,	 gold[102] = 15
+Hardware[103] = 135,	 gold[103] = 135
+Hardware[104] = 0,	 gold[104] = 0
+Hardware[105] = 0,	 gold[105] = 0
+Hardware[106] = 105,	 gold[106] = 105
+Hardware[107] = 0,	 gold[107] = 0
+Hardware[108] = 0,	 gold[108] = 0
+Hardware[109] = 59,	 gold[109] = 59
+Hardware[110] = 0,	 gold[110] = 0
+Hardware[111] = 0,	 gold[111] = 0
+Hardware[112] = 0,	 gold[112] = 0
+Hardware[113] = 0,	 gold[113] = 0
+Hardware[114] = 0,	 gold[114] = 0
+Hardware[115] = 0,	 gold[115] = 0
+Hardware[116] = 91,	 gold[116] = 91
+Hardware[117] = 0,	 gold[117] = 0
+Hardware[118] = 0,	 gold[118] = 0
+Hardware[119] = 198,	 gold[119] = 198
+Hardware[120] = 0,	 gold[120] = 0
+Hardware[121] = 62,	 gold[121] = 62
+Hardware[122] = 76,	 gold[122] = 76
+Hardware[123] = 45,	 gold[123] = 45
+Hardware[124] = 0,	 gold[124] = 0
+Hardware[125] = 0,	 gold[125] = 0
+Hardware[126] = 0,	 gold[126] = 0
+Hardware[127] = 0,	 gold[127] = 0
+Total Differences: 0
+Interrupt count = 0
+

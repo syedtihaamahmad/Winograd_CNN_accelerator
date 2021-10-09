@@ -1,0 +1,188 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+ofstream in_sdk_file("../dbg/input_sdk.txt");
+ofstream out_sdk_file("../dbg/out_L2_sdk.txt");
+
+#include "core.h"
+#include "data_loader.cpp"
+//#include "interpret.hpp"
+
+/*
+ * Mode 1: Output bitwidth = 8*4
+ *
+ * Mode 2: Out bitwidth = 64
+ *
+ * */
+int mode = 1;
+
+
+int main()
+{
+	cout<<"Vals per input = "<< Vals_per_Input <<", Input depth = "<<INPUT_depth<<endl;
+	load_parameters(2);
+//	int state = read_parameters();
+//	if(state == 1)
+//		return 1;
+//	std::cout.setstate(std::ios_base::failbit);
+	hls::stream<ap_uint<simd*8*4*4>> inStream("tb_input_stream");
+//	hls::stream<ap_uint<8*out_parallel_C2>> outStream("tb_output_stream");
+	TO_32 outStream[(OFM_DIM_C2*OFM_DIM_C2*OFM_CH_C2*NUM_REPS)/4] = {0};
+
+	ap_uint<simd*8*4*4> input[ifmChannels/simd];
+
+	int rep = 1;
+
+	cout<<"Loading image ..."<<endl;
+	ap_uint<bitw> image[NUM_REPS][IMG_CH][IMG_DIM][IMG_DIM] = {
+//			#include "7_padded.txt"
+			#include "../data/weights_bn_v1_pack/input_image.txt"
+			};
+	cout<<"Packing image ..."<<endl;
+	ap_uint<MEM_BANDWIDTH> packed_image[INPUT_depth * NUM_REPS] = {0};
+	unsigned packed_iter=0;
+	unsigned int num=0;
+	ap_uint<MEM_BANDWIDTH> temp1 = 0;
+	for(int rep=0; rep < NUM_REPS; rep++)
+		for(int r = 0; r<IMG_DIM; r++){
+			for(int c = 0; c<IMG_DIM; c++){
+				for(int dp=0; dp<IMG_CH; dp++){
+
+					unsigned int lowBit = num * 8;
+					unsigned int highBit = (num+1)*8 - 1;
+					temp1.range(highBit,lowBit) = image[rep][dp][r][c];
+
+					if(++num == (MEM_BANDWIDTH/8)){
+						packed_image[packed_iter++] = temp1;
+						in_sdk_file <<hex<<temp1<<","<<endl;
+						cout<<(packed_iter-1)<<" ";
+						num = 0;
+						temp1 = 0;
+					}
+				}
+			}
+		}
+
+	in_sdk_file.close();
+	cout <<"Running Image..."<<endl;
+	nn_top(packed_image, outStream, false,
+			0, 0, 0,
+			0, 0, NUM_REPS);
+	cout<<"Run completed."<<endl;
+int diff = 0;
+int temp_diff = 0;
+int c_pool = 0;
+//int pool1_gold[3136] = {
+//#include "pool1(gold).txt"
+//};
+
+int pool2_gold[980*NUM_REPS]={
+#include "../data/weights_bn_v1_pack/pool2(gold).txt"
+};
+//	cout.clear();
+	int outData[NUM_REPS][OFM_CH_C2][OFM_DIM_C2][OFM_DIM_C2] = {0};
+//	int outData_sdk[(OFM_DIM_C2*OFM_DIM_C2*OFM_CH_C2)] = {0};
+//	cout<<"Output stream size = "<<outStream.size()<<endl;
+//	if(outStream.empty())
+//		cout<<"Output Stream empty"<<endl;
+//	int out_size = outStream.size();
+
+	TO_32 temp_out = 0;
+	packed_iter = 0;
+	int depth_iter=0;
+	int row_iter=0;
+	int col_iter=0;
+
+//	if(mode == 2)
+//	{
+//		for(int i=0; i<(OFM_DIM_C2*OFM_DIM_C2*OFM_CH_C2)/(MEM_BANDWIDTH/8)+1; i++)
+//		{
+//			temp_out = outStream[packed_iter++];
+//			out_sdk_file << hex<<temp_out<<endl;
+//			for(int j=0; j<4; j++)
+//			{
+//				if(depth_iter >= OFM_CH_C2)
+//				{
+//					col_iter++;
+//					if(col_iter >= OFM_DIM_C2){
+//						row_iter++;
+//						if(row_iter >= OFM_DIM_C2)
+//							break;
+//					}
+//				}
+//				unsigned int lowBit = j * 8;
+//				unsigned int highBit = (j+1)*8 - 1;
+//				outData[depth_iter++][row_iter][col_iter] = temp_out.range(highBit,lowBit);
+//
+//			}
+//
+//			if(row_iter >= OFM_DIM_C2)
+//				break;
+//		}
+//		cout<<"output unpacked ..."<<endl;
+//		out_sdk_file.close();
+//	}
+	if (mode == 1)
+	{
+
+		temp_out = 0;
+		packed_iter = 0;
+		for(int rep=0; rep<NUM_REPS; rep++)
+			for(int r = 0; r<OFM_DIM_C2; r++)
+				for(int c = 0; c<OFM_DIM_C2; c++)
+					for(int i = 0; i<OFM_CH_C2/4; i++)
+						{
+		//				temp_out = outStream.read();
+						temp_out = outStream[packed_iter++];
+						out_sdk_file << hex<<temp_out<<endl;
+							for(int j =0; j<4; j++)
+								{
+									unsigned int lowBit = j * 8;
+									unsigned int highBit = (j+1)*8 - 1;
+									outData[rep][i*4 + j][r][c] = temp_out.range(highBit,lowBit);
+								}
+						}
+		cout<<"output unpacked ..."<<endl;
+		out_sdk_file.close();
+	}
+
+		int count = 0;
+	//	cout.clear();
+		cout<<"Printing Output"<<endl;
+		c_pool = 0;
+		for(int rep=0; rep<NUM_REPS; rep++)
+			for(int i = 0; i<OFM_CH_C2; i++)
+				{
+					for(int r = 0; r<OFM_DIM_C2; r++)
+						{	for(int c = 0; c<OFM_DIM_C2; c++)
+								{cout<<outData[rep][i][r][c];
+									temp_diff = abs(outData[rep][i][r][c] - pool2_gold[c_pool++]);
+									if(temp_diff > 22)
+										{cout<<"Diff = "<< temp_diff <<" @"<<c_pool-1;
+										diff++;
+										}
+									cout<<endl;
+								}
+						}
+				}
+		cout.clear();
+		cout<<"Differences calculated"<<endl;
+		cout<<"Total Differences = "<<diff<<endl;
+
+		for(int rep=0; rep<NUM_REPS; rep++){
+			cout<<"Image: "<<rep+1<<endl;
+			for(int r=0;r<OFM_DIM_C2; r++)
+				{
+					for(int c=0; c<OFM_DIM_C2; c++)
+						cout<<outData[rep][0][r][c]<<" ";
+					cout<<endl;
+				}
+		}
+
+
+if (diff == 0)
+	return 0;
+else
+	return 1;
+}

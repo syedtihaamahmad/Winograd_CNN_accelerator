@@ -47,4 +47,8 @@ To test my own sliding window method and compare with the Xilinx FINN method.
 	772.04 images/sec
 
 
+#### Contributors:
 
+Syed Tihaam Ahmad
+
+[Abdullah Ashfaq](https://github.com/AbdullahAshfaq)
